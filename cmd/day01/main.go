@@ -7,6 +7,11 @@ import (
 	"strconv"
 )
 
+const (
+	dialSize            = 100
+	initialDialPosition = 50
+)
+
 type Rotation struct {
 	Direction rune
 	Distance  int
@@ -52,7 +57,6 @@ func ReadRotations(filename string) ([]Rotation, error) {
 }
 
 func WrapDial(dial int) int {
-	dialSize := 100
 	dial %= dialSize
 	if dial < 0 {
 		dial += dialSize
@@ -88,7 +92,7 @@ func main() {
 		panic(err)
 	}
 
-	dial := 50
+	dial := initialDialPosition
 	zeroStopCount := 0
 	zeroCrossCount := 0
 
