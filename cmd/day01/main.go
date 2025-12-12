@@ -54,8 +54,8 @@ func ReadRotations(filename string) ([]Rotation, error) {
 // Move `dial` in `direction` `distance` clicks, tracking how many times the
 // dial crosses zero.
 // Returns the new dial value and the number of zero crossings.
-func count_zero_crosses(dial int, direction rune, distance int) (int, int) {
-	zero_cross_count := 0
+func CountZeroCrosses(dial int, direction rune, distance int) (int, int) {
+	zeroCrossCount := 0
 
 	for range distance {
 		switch direction {
@@ -66,11 +66,11 @@ func count_zero_crosses(dial int, direction rune, distance int) (int, int) {
 		}
 		dial %= 100
 		if dial == 0 {
-			zero_cross_count++
+			zeroCrossCount++
 		}
 	}
 
-	return dial, zero_cross_count
+	return dial, zeroCrossCount
 }
 
 func main() {
@@ -80,24 +80,24 @@ func main() {
 	}
 
 	dial := 50
-	zero_stop_count := 0
-	zero_cross_count := 0
+	zeroStopCount := 0
+	zerocCrossCount := 0
 
-	var zero_cross_during_rotation int
+	var zeroCrossDuringRotation int
 
 	for _, rotation := range rotations {
-		dial, zero_cross_during_rotation = count_zero_crosses(
+		dial, zeroCrossDuringRotation = CountZeroCrosses(
 			dial,
 			rotation.Direction,
 			rotation.Distance,
 		)
 
-		zero_cross_count += zero_cross_during_rotation
+		zerocCrossCount += zeroCrossDuringRotation
 
 		if dial == 0 {
-			zero_stop_count += 1
+			zeroStopCount += 1
 		}
 	}
 
-	fmt.Printf("%d %d\n", zero_stop_count, zero_cross_count)
+	fmt.Printf("%d %d\n", zeroStopCount, zerocCrossCount)
 }
