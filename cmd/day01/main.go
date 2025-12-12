@@ -51,6 +51,15 @@ func ReadRotations(filename string) ([]Rotation, error) {
 	return rotations, nil
 }
 
+func WrapDial(dial int) int {
+	dialSize := 100
+	dial %= dialSize
+	if dial < 0 {
+		dial += dialSize
+	}
+	return dial
+}
+
 // Move `dial` in `direction` `distance` clicks, tracking how many times the
 // dial crosses zero.
 // Returns the new dial value and the number of zero crossings.
@@ -64,7 +73,7 @@ func CountZeroCrosses(dial int, direction rune, distance int) (int, int) {
 		case 'R':
 			dial++
 		}
-		dial %= 100
+		dial = WrapDial(dial)
 		if dial == 0 {
 			zeroCrossCount++
 		}
