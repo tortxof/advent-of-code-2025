@@ -57,6 +57,9 @@ func ReadRotations(filename string) ([]Rotation, error) {
 }
 
 func WrapDial(dial int) int {
+	if dial >= 0 && dial < dialSize {
+		return dial
+	}
 	dial %= dialSize
 	if dial < 0 {
 		dial += dialSize
