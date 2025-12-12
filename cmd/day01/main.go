@@ -111,7 +111,7 @@ func main() {
 		zeroCrossCount += zeroCrossDuringRotation
 
 		if dial == 0 {
-			zeroStopCount += 1
+			zeroStopCount++
 		}
 	}
 
