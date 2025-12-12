@@ -90,7 +90,7 @@ func main() {
 
 	dial := 50
 	zeroStopCount := 0
-	zerocCrossCount := 0
+	zeroCrossCount := 0
 
 	var zeroCrossDuringRotation int
 
@@ -101,12 +101,12 @@ func main() {
 			rotation.Distance,
 		)
 
-		zerocCrossCount += zeroCrossDuringRotation
+		zeroCrossCount += zeroCrossDuringRotation
 
 		if dial == 0 {
 			zeroStopCount += 1
 		}
 	}
 
-	fmt.Printf("%d %d\n", zeroStopCount, zerocCrossCount)
+	fmt.Printf("%d %d\n", zeroStopCount, zeroCrossCount)
 }
