@@ -56,3 +56,9 @@ When starting a new day:
 2. Add puzzle input to `inputs/dayNN.txt`
 3. Each solution is self-contained; copy patterns from existing days if helpful
 4. Add common utilities to `internal/util/` as patterns emerge
+
+## Agent Instructions
+
+Don't implement anything or modify code. The goal of Advent of Code is for the
+user to learn. Only answer questions and give sample implementations. Don't do
+the work for the user.
