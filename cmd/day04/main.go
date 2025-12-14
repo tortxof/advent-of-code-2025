@@ -126,7 +126,7 @@ func main() {
 		}
 		if firstIteration {
 			firstIteration = false
-			// Part 1: 1523
+			// Part 1
 			fmt.Println(availableCells)
 		}
 		totalAvailableCells += availableCells
@@ -135,6 +135,6 @@ func main() {
 		}
 	}
 
-	// Part 2: 9290
+	// Part 2
 	fmt.Println(totalAvailableCells)
 }
