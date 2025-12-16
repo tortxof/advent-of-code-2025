@@ -65,6 +65,49 @@ func EvaluateTachyonLevel(beamSet *BeamSet, level TachyonLevel) int {
 	return numSplits
 }
 
+type QuantumBeamSet struct {
+	Positions map[int]int
+}
+
+func NewQuantumBeamSet() *QuantumBeamSet {
+	return &QuantumBeamSet{
+		Positions: make(map[int]int),
+	}
+}
+
+func (q *QuantumBeamSet) Add(position int, quantity int) {
+	q.Positions[position] += quantity
+}
+
+func (q *QuantumBeamSet) Remove(position int) int {
+	quantity := q.Positions[position]
+	delete(q.Positions, position)
+	return quantity
+}
+
+func (q *QuantumBeamSet) Contains(position int) bool {
+	_, exists := q.Positions[position]
+	return exists
+}
+
+func QuantumEvaluateTachyonLevel(quantumBeamSet *QuantumBeamSet, level TachyonLevel) int {
+	numSplits := 0
+	for i, r := range level.Cells {
+		switch r {
+		case 'S':
+			quantumBeamSet.Add(i, 1)
+		case '^':
+			if quantumBeamSet.Contains(i) {
+				numIncoming := quantumBeamSet.Remove(i)
+				numSplits += numIncoming
+				quantumBeamSet.Add(i-1, numIncoming)
+				quantumBeamSet.Add(i+1, numIncoming)
+			}
+		}
+	}
+	return numSplits
+}
+
 func ReadData(path string) (TachyonManifold, error) {
 	file, err := os.Open(path)
 	if err != nil {
@@ -102,13 +145,21 @@ func main() {
 	}
 
 	beamSet := NewBeamSet()
+	quantumBeamSet := NewQuantumBeamSet()
 	numSplits := 0
+	numQuantumSplits := 0
 	for _, level := range manifold.Levels {
 		var levelSplits int
+		var quantumLevelSplits int
 		levelSplits = EvaluateTachyonLevel(beamSet, level)
+		quantumLevelSplits = QuantumEvaluateTachyonLevel(quantumBeamSet, level)
 		numSplits += levelSplits
+		numQuantumSplits += quantumLevelSplits
 	}
 
 	// Part 1: 1518
 	fmt.Println(numSplits)
+
+	// Part 2
+	fmt.Println(numQuantumSplits + 1)
 }
