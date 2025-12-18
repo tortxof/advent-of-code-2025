@@ -2,6 +2,11 @@ package util
 
 import "math"
 
+type Point2D struct {
+	X int
+	Y int
+}
+
 type Point3D struct {
 	X float64
 	Y float64
