@@ -2,6 +2,13 @@ package util
 
 import "math"
 
+func Abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
+
 type Point2D struct {
 	X int
 	Y int
