@@ -9,6 +9,25 @@ func Abs(x int) int {
 	return x
 }
 
+func IsDigit(r rune) bool {
+	return r >= '0' && r <= '9'
+}
+
+func ParseAsciiDigit(r rune) int {
+	return int(r - '0')
+}
+
+// Reverse the order of the least significant `numBits` bits.
+func ReverseBits(value uint, numBits int) uint {
+	var result uint
+	for range numBits {
+		result <<= 1
+		result |= value & 1
+		value >>= 1
+	}
+	return result
+}
+
 type Point2D struct {
 	X int
 	Y int
